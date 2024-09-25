@@ -8,6 +8,14 @@ def get_counts_from_particles(particles):
     return melted_df.groupby(["Columns", "Values"]).size().reset_index(name="Counts")
 
 
+def get_links_from_pedigree(particles, pedigree, observations):
+    links = []
+    for t in range(len(observations)):
+        for dest, origin in enumerate(pedigree[t, :]):
+            links.append([t, t + 1, particles[t, 1, origin], particles[t + 1, 1, dest]])
+    return np.array(links)
+
+
 # Plot results for number of infectious from output array
 def plot_particle_results(prop_particles, resamp_particles, observations):
     prop_counts = get_counts_from_particles(prop_particles[:, 1, :])
@@ -30,14 +38,6 @@ def plot_particle_results(prop_particles, resamp_particles, observations):
     plt.scatter(range(1, len(observations) + 1), observations, label="target", color="k")
     plt.legend()
     return results_plot
-
-
-def get_links_from_pedigree(particles, pedigree, observations):
-    links = []
-    for t in range(len(observations)):
-        for dest, origin in enumerate(pedigree[t, :]):
-            links.append([t, t + 1, particles[t, 1, origin], particles[t + 1, 1, dest]])
-    return np.array(links)
 
 
 def plot_links(particles, links, obs):
