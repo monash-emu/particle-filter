@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "emu_filter"
+version = "0.1"
+readme = "README.md"
+license = "BSD-2-Clause"
+homepage = "https://github.com/monash-emu/particle-filter"
+repository = "https://github.com/monash-emu/particle-filter"
+documentation = "https://github.com/monash-emu/particle-filter"
+keywords = [
+    "covid19",
+]
+description = "Particle filter implementation for infectious diseases"
+authors = [
+    "James Trauer <james.trauer@monash.edu>",
+    "David Shipman <david.shipman@monash.edu>",
+    "Angus Hughes <angus.hughes@monash.edu>",
+    "Romain Ragonnet <romain.ragonnet@monash.edu>",
+]
+packages = [
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8.0, <4.0.0"
+numpy = "<2.0.0"
+scipy = "*"
+matplotlib = "*"
+pandas = "*"
+kaleido = {version = "==0.2.1", optional = true}
+
+[tool.poetry.extras]
+full = ["kaleido"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100

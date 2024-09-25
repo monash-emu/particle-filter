@@ -1,0 +1,1 @@
+Implementation of a state-space particle filter, initially for use with infectious disease models (e.g. SIR).
