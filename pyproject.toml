@@ -17,6 +17,7 @@ authors = [
     "Romain Ragonnet <romain.ragonnet@monash.edu>",
 ]
 packages = [
+    {include = "emu_filter"}
 ]
 
 [tool.poetry.dependencies]
