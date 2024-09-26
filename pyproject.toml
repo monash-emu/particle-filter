@@ -21,12 +21,12 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8.0, <4.0.0"
-numpy = "<2.0.0"
+python = ">=3.10.0, <4.0.0"
+numpy = "*"
 scipy = "*"
 matplotlib = "*"
 pandas = "*"
-kaleido = {version = "==0.2.1", optional = true}
+kaleido = {version = ">=0.2.1", optional = true}
 
 [tool.poetry.extras]
 full = ["kaleido"]
