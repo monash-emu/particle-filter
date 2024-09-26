@@ -26,6 +26,8 @@ numpy = "*"
 scipy = "*"
 matplotlib = "*"
 pandas = "*"
+jax = "*"
+jaxlib = "*"
 kaleido = {version = ">=0.2.1", optional = true}
 
 [tool.poetry.extras]
