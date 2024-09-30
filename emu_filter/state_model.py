@@ -1,8 +1,7 @@
 import numpy as np
 
 
-# Updating particles
-def binomial_sample(particles, contact_rate, recovery_rate, total_pop, volatility):
+def binomial_sample(particles, contact_rate, recovery_rate, total_pop):
     updated_particles = np.empty_like(particles)
     suscept, infect, recovered = particles[0, :], particles[1, :], particles[2, :]
     new_infections = np.random.binomial(suscept, 1.0 - np.exp(-contact_rate * infect / total_pop))
@@ -15,7 +14,7 @@ def binomial_sample(particles, contact_rate, recovery_rate, total_pop, volatilit
     return updated_particles
 
 
-def random_walk(particles, contact_rate, recovery_rate, total_pop, volatility):
+def random_walk(particles, recovery_rate, total_pop, volatility):
     updated_particles = np.empty_like(particles)
     suscept, infect, recovered, process = particles[0, :], particles[1, :], particles[2, :], particles[3, :]
     new_contact_rates = np.exp(np.random.normal(np.log(process), volatility, particles.shape[1]))
