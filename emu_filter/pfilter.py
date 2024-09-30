@@ -1,18 +1,18 @@
 import numpy as np
 
 
-def filter_loop(observations, predict_state, particles, importance, params, target_sd):
+def filter_loop(observations, predict_state, particles, importance, process_params, importance_params):
     prop_particles = np.copy(particles)
     n_particles = particles.shape[2]
     pedigree = np.zeros([len(observations), n_particles], dtype=int)
     for t, obs in enumerate(observations):
     
         # Prediction
-        proposed_particles = predict_state(particles[t, :, :], **params)
+        proposed_particles = predict_state(particles[t, :, :], **process_params)
         prop_particles[t + 1, :] = proposed_particles
     
         # Importance
-        weights = importance(proposed_particles[1, :], obs, target_sd)
+        weights = importance(proposed_particles[1, :], obs, **importance_params)
         norm_weights = weights / sum(weights)
     
         # Resampling
