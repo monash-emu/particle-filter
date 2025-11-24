@@ -4,15 +4,15 @@ import matplotlib.pyplot as plt
 
 
 def get_counts_from_particles(particles):
-    melted_df = pd.DataFrame(particles.T).melt(var_name="Columns", value_name="Values")
+    melted_df = pd.DataFrame(particles).melt(var_name="Columns", value_name="Values")
     return melted_df.groupby(["Columns", "Values"]).size().reset_index(name="Counts")
 
 
 def get_links_from_pedigree(particles, pedigree, observations):
     links = []
     for t in range(len(observations)):
-        for dest, origin in enumerate(pedigree[t, :]):
-            links.append([t, t + 1, particles[t, 1, origin], particles[t + 1, 1, dest]])
+        for dest, origin in enumerate(pedigree[:, t]):
+            links.append([t, t + 1, particles[origin, t, 1], particles[dest, t + 1, 1]])
     return np.array(links)
 
 
@@ -41,7 +41,7 @@ def plot_particle_results(prop_particles, resamp_particles, observations):
 
 
 def plot_links(particles, links, obs):
-    resamp_counts = get_counts_from_particles(particles[:, 1, :])
+    resamp_counts = get_counts_from_particles(particles[:, :, 1])
     links_plot = plt.scatter(
         resamp_counts["Columns"],
         resamp_counts["Values"],
