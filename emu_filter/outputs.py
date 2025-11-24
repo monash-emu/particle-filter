@@ -18,8 +18,8 @@ def get_links_from_pedigree(particles, pedigree, observations):
 
 # Plot results for number of infectious from output array
 def plot_particle_results(prop_particles, resamp_particles, observations):
-    prop_counts = get_counts_from_particles(prop_particles[:, 1, :])
-    resamp_counts = get_counts_from_particles(resamp_particles[:, 1, :])
+    prop_counts = get_counts_from_particles(prop_particles[:, :, 1])
+    resamp_counts = get_counts_from_particles(resamp_particles[:, :, 1])
     results_plot = plt.scatter(
         prop_counts["Columns"] - 0.2,
         prop_counts["Values"],
