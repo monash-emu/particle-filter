@@ -2,9 +2,10 @@ import numpy as np
 
 
 # Updating particles
-def predict_states(particles, contact_rate, recovery_rate, total_pop):
-    updated_particles = np.empty_like(particles)
-    suscept, infect, recovered = particles[:, 0], particles[:, 1], particles[:, 2]
+def predict_states(particle_states, contact_rate, recovery_rate):
+    updated_particles = np.empty_like(particle_states)
+    suscept, infect, recovered = particle_states[:, 0], particle_states[:, 1], particle_states[:, 2]
+    total_pop = particle_states.sum(axis=-1)
     force_infection = contact_rate * infect / total_pop
     new_infections = np.random.binomial(suscept, 1.0 - np.exp(-force_infection))
     new_recoveries = np.random.binomial(infect, 1.0 - np.exp(-recovery_rate))
